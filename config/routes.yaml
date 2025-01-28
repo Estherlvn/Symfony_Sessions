@@ -1,0 +1,25 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+app_sessions:
+    path: /sessions
+    controller: App\Controller\SessionController::index
+
+app_formations:
+    path: /formations
+    controller: App\Controller\FormationController::index
+
+app_modules:
+    path: /modules
+    controller: App\Controller\ModuleController::index
+
+app_categories:
+    path: /categories
+    controller: App\Controller\CategorieController::index
