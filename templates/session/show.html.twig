@@ -1,22 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la session{% endblock %}
+{% block title %}Modules de la session{% endblock %}
 
 {% block body %}
 
-    <h1>Détails de la session : {{ session.intitule }}</h1>
+    <h1>Modules pour la session: <br> {{ session.intitule }}</h1>
 
-    <ul>
-        <li><strong>Date de début :</strong> {{ session.dateDebut|date('d/m/Y') }}</li>
-        <li><strong>Date de fin :</strong> {{ session.dateFin|date('d/m/Y') }}</li>
+    {% if session.programmes is not empty %}
+        <ul>
+            {% for programme in session.programmes %}
+                <li>
+                    {{ programme.module.nomModule }} - 
+                    Durée : {{ programme.nbJour }} 
+                    {{ programme.nbJour == 1 ? 'jour' : 'jours' }}  {#}afficher "jour" au singulier si nbJour = "1". Sinon afficher "jours"{#}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun module trouvé pour cette session.</p>
+    {% endif %}
 
-        <li><strong>Nombre de places :</strong> {{ session.nbPlace }}</li>
-        <li><strong>Nombre de places réservées :</strong> {{ session.nbPlacesReservees }}</li>
-        <li><strong>Nombre de places restantes :</strong> {{ session.nbPlacesRestantes }}</li>
-
-        <li><strong>Formation :</strong> {{ session.formation.nomFormation }}</li>
-    </ul>
-
-    <a href="{{ path('app_sessions') }}">Retour aux sessions</a>
+    <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
+        Retour aux sessions de la formation
+    </a>
+    
 
 {% endblock %}

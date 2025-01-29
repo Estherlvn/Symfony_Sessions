@@ -14,7 +14,9 @@
                     <th>Date de début</th>
                     <th>Date de fin</th>
                     <th>Nombre de places</th>
-                    <th>Voir détails</th>
+                    <th>Places réservées</th>
+                    <th>Places restantes</th>
+                    <th>Modules</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,9 +25,11 @@
                         <td>{{ session.intitule }}</td>
                         <td>{{ session.dateDebut|date('d/m/Y') }}</td>
                         <td>{{ session.dateFin|date('d/m/Y') }}</td>
+                        <td>{{ session.nbPlacesReservees }}</td>
+                        <td>{{ session.nbPlacesRestantes }}</td>
                         <td>{{ session.nbPlace }}</td>
                         <td>
-                            <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir session</a>
+                            <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir modules</a>
                         </td>
                     </tr>
                 {% endfor %}
