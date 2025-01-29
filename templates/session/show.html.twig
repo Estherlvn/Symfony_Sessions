@@ -6,11 +6,18 @@
 
     <h1>Modules pour la session: <br> {{ session.intitule }}</h1>
 
+    <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
+        Retour aux sessions de la formation
+    </a>
+
+
+    {#}Tableau des modules de la session{#}
     {% if session.programmes is not empty %}
+    <h3>Modules enregistrés</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Module</th>
+                    <th>Intitulé</th>
                     <th>Durée</th>
                 </tr>
             </thead>
@@ -31,9 +38,30 @@
         <p>Aucun module trouvé pour cette session.</p>
     {% endif %}
 
-    <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
-        Retour aux sessions de la formation
-    </a>
+        
+    {# Tableau des stagiaires inscrits dans la session #}
+    {% if session.stagiaires is not empty %}
+    <h3>Stagiaires inscrits</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom du stagiaire</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stagiaire in session.stagiaires %}
+                    <tr>
+                        <td>{{ stagiaire.nom }}</td>
+                        <td>{{ stagiaire.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun stagiaire inscrit pour cette session.</p>
+    {% endif %}
+    
 
 {% endblock %}
 
