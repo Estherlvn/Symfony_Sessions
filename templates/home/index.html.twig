@@ -1,13 +1,15 @@
-{% extends 'base.html.twig' %}
-{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}  {# templates/home/index.html.twig #}
 
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
 
-    <h1>Bienvenue sur notre site !</h1>
+    <h1>Bienvenue sur votre tableau de bord, FormaTech</h1>
+    
+    <a href="{{ path('app_sessions') }}">Consulter les sessions à venir</a> <br>
+    <a href="{{ path('app_formateurs') }}">Consulter la liste des formateurs</a> <br>
+    <a href="{{ path('app_stagiaires') }}">Consulter la liste des stagiaires</a> <br>
 
-    <p>Ceci est la page d'accueil de notre application Symfony.</p>
-    <p>Vous pouvez naviguer vers différentes sections du site à partir de la barre de navigation.</p>
 
 {% endblock %}
+
