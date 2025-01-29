@@ -12,7 +12,9 @@
                 {{ session.intitule }} - 
                 {{ session.dateDebut|date('d/m/Y') }} - 
                 {{ session.dateFin|date('d/m/Y') }} - 
-                {{ session.nbPlace }} places
+                {{ session.nbPlace }} places totales - 
+                {{ session.nbPlacesReservees }} réservées - 
+                {{ session.nbPlacesRestantes }} restantes
             </li>
         {% else %}
             <p>Aucune session à venir.</p>

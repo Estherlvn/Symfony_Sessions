@@ -107,6 +107,21 @@ class Session
         return $this;
     }
 
+
+    // pour calculer le nbre de places réservées/places restantes
+        public function getNbPlacesReservees(): int
+    {
+        return count($this->stagiaires);
+    }
+
+    public function getNbPlacesRestantes(): int
+    {
+        return $this->nbPlace - $this->getNbPlacesReservees();
+    }
+
+
+
+
     public function getFormation(): ?Formation
     {
         return $this->formation;
