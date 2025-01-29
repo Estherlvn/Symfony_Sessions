@@ -6,19 +6,33 @@
 
     <h1>Sessions à venir</h1>
 
-    <ul>
-        {% for session in sessions %}
-            <li>
-                {{ session.intitule }} - 
-                {{ session.dateDebut|date('d/m/Y') }} - 
-                {{ session.dateFin|date('d/m/Y') }} - 
-                {{ session.nbPlace }} places totales - 
-                {{ session.nbPlacesReservees }} réservées - 
-                {{ session.nbPlacesRestantes }} restantes
-            </li>
-        {% else %}
-            <p>Aucune session à venir.</p>
-        {% endfor %}
-    </ul>
+    {% if sessions is not empty %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Intitulé de la session</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Places totales</th>
+                    <th>Places réservées</th>
+                    <th>Places restantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in sessions %}
+                    <tr>
+                        <td>{{ session.intitule }}</td>
+                        <td>{{ session.dateDebut|date('d/m/Y') }}</td>
+                        <td>{{ session.dateFin|date('d/m/Y') }}</td>
+                        <td>{{ session.nbPlace }}</td>
+                        <td>{{ session.nbPlacesReservees }}</td>
+                        <td>{{ session.nbPlacesRestantes }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune session à venir.</p>
+    {% endif %}
 
 {% endblock %}
