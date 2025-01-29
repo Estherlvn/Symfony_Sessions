@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
@@ -16,10 +19,10 @@
             <nav>
                 <ul>
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_sessions') }}">Sessions</a></li>
                     <li><a href="{{ path('app_formations') }}">Formations</a></li>
-                    <li><a href="{{ path('app_modules') }}">Modules</a></li>
-                    <li><a href="{{ path('app_categories') }}">Catégories</a></li>
+                    <li><a href="{{ path('app_sessions') }}">Sessions</a></li>
+                    <li><a href="{{ path('app_formateurs') }}">Formateurs</a></li>
+                    <li><a href="{{ path('app_stagiaires') }}">Stagiaires</a></li>
                 </ul>
             </nav>
         </header>

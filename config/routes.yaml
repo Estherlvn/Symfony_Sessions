@@ -23,3 +23,11 @@ app_modules:
 app_categories:
     path: /categories
     controller: App\Controller\CategorieController::index
+
+app_formateurs:
+    path: /formateurs
+    controller: App\Controller\FormateurController::index
+
+app_stagiaires:
+    path: /stagiaires
+    controller: App\Controller\StagiaireController::index
