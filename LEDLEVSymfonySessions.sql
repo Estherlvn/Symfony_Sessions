@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.categorie : ~5 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.categorie : ~4 rows (environ)
 INSERT INTO `categorie` (`id`, `nom_categorie`) VALUES
 	(1, 'Bureautique'),
 	(2, 'Développement web'),
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.doctrine_migration_versions : ~1 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.doctrine_migration_versions : ~0 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20250128140745', '2025-01-28 14:08:10', 1003);
 
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   CONSTRAINT `FK_C242628BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.module : ~24 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.module : ~23 rows (environ)
 INSERT INTO `module` (`id`, `categorie_id`, `nom_module`) VALUES
 	(1, 1, 'Word'),
 	(2, 1, 'Excel'),
@@ -193,7 +193,10 @@ CREATE TABLE IF NOT EXISTS `session_stagiaire` (
   CONSTRAINT `FK_C80B23BBBA93DD6` FOREIGN KEY (`stagiaire_id`) REFERENCES `stagiaire` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~0 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~2 rows (environ)
+INSERT INTO `session_stagiaire` (`session_id`, `stagiaire_id`) VALUES
+	(1, 1),
+	(1, 2);
 
 -- Listage de la structure de table ledlevsymfonysessions. stagiaire
 CREATE TABLE IF NOT EXISTS `stagiaire` (
@@ -207,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.stagiaire : ~3 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.stagiaire : ~2 rows (environ)
 INSERT INTO `stagiaire` (`id`, `nom`, `prenom`, `date_naissance`, `ville`, `email`, `telephone`) VALUES
 	(1, 'MARCHAND', 'Maxime', '1988-01-21', 'STRASBOURG', 'maxime@stagiaire.com', '0645796525'),
 	(2, 'LOYAL', 'Clara', '2000-02-23', 'MULHOUSE', 'clara@stagiaire.com', '0645963521'),
