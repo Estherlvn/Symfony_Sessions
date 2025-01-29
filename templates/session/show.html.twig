@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la session{% endblock %}
+
+{% block body %}
+
+    <h1>Détails de la session : {{ session.intitule }}</h1>
+
+    <ul>
+        <li><strong>Date de début :</strong> {{ session.dateDebut|date('d/m/Y') }}</li>
+        <li><strong>Date de fin :</strong> {{ session.dateFin|date('d/m/Y') }}</li>
+
+        <li><strong>Nombre de places :</strong> {{ session.nbPlace }}</li>
+        <li><strong>Nombre de places réservées :</strong> {{ session.nbPlacesReservees }}</li>
+        <li><strong>Nombre de places restantes :</strong> {{ session.nbPlacesRestantes }}</li>
+
+        <li><strong>Formation :</strong> {{ session.formation.nomFormation }}</li>
+    </ul>
+
+    <a href="{{ path('app_sessions') }}">Retour aux sessions</a>
+
+{% endblock %}

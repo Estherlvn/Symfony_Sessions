@@ -4,17 +4,18 @@
 
 {% block body %}
 
+
 <h1>Nos formations</h1>
 
-    <ul>
-        {% for formation in formations %}
-            <li>
+<ul>
+    {% for formation in formations %}
+        <li>
+            <a href="{{ path('app_formation_show', {'id': formation.id}) }}">
                 {{ formation.nomFormation }}
-            </li>
-        {% endfor %}
-    </ul>
-
-
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 
 
 {% endblock %}

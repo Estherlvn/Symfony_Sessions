@@ -18,4 +18,22 @@ final class FormationController extends AbstractController
             'formations' => $formations,
         ]);
     }
+
+
+    #[Route('/formations/{id}', name: 'app_formation_show')]
+    public function show(int $id, FormationRepository $formationRepository): Response
+    {
+        $formation = $formationRepository->find($id);
+
+        if (!$formation) {
+            throw $this->createNotFoundException('Formation non trouvée.');
+        }
+
+        return $this->render('formation/show.html.twig', [
+            'formation' => $formation,
+        ]);
+    }
+
+
 }
+
