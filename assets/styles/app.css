@@ -5,11 +5,25 @@ body {
   font-family: "Encode Sans Semi Expanded", serif;
 }
 
+main {
+  margin: 150px 180px;
+}
+
+
+/************* NAV BARS ***********/
+
+.logo {
+  display: block; /* Pour éviter les marges inutiles */
+  margin: 50px auto; /* Centre horizontalement */
+  width: 80px; /* Ajuste la taille */
+}
+
 .navbar-vertical {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
-  width: 200px; /* Largeur de la navbar */
+  width: 300px; /* Largeur de la navbar */
   height: 100vh; /* Hauteur de l'écran */
   background-color: #263782;
   padding-top: 20px;
@@ -25,6 +39,30 @@ body {
   color: #fff;
 }
 
-main {
-  margin: 100px 150px;
+
+a.nav-link {
+  margin: 5px 50px;
 }
+
+
+/* Navbar horizontale fixée en haut */
+.top-navbar {
+  height: 40px; /* Hauteur de la barre */
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(248, 249, 250, 0.9);
+}
+
+.top-navbar .nav-link {
+  font-size: smaller;
+  margin-right: 5px;
+}
+
+
+

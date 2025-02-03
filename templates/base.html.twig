@@ -19,11 +19,29 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+
     <body>
         <header>
+        <!-- Navbar horizontale fixe en haut pour la connexion -->
+            <nav class="navbar navbar-expand-lg fixed-top top-navbar">
+                <div class="container-fluid">
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Mon Profil</a> <!-- Lien vers le profil -->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Déconnexion</a> <!-- Lien de déconnexion -->
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <!-- Navbar verticale fixe à gauche pour le menu -->
             <nav class="navbar-vertical">
                 
-                <img src="{{ asset('img/launchpad.png') }}" alt="Logo" class="mb-3" width="80">
+                <img src="{{ asset('img/launchpad.png') }}" alt="Logo" class="logo" width="80">
 
                 <ul class="nav flex-column nav-pills">
                     <li class="nav-item">
