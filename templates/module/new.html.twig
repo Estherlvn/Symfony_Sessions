@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Ajouter un module{% endblock %}
+
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Ajouter un module</h1>
+
+    <div class="card shadow p-4 mt-4">
+        {{ form_start(formAddModule, {'attr': {'class': 'needs-validation'}}) }}
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_label(formAddModule.nomModule, 'Nom du module', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formAddModule.nomModule, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_label(formAddModule.categorie, 'Catégorie', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formAddModule.categorie, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+    
+        
+        <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary px-5 py-2">Enregistrer</button>
+        <a href="{{ path('app_module') }}" class="btn btn-secondary px-5 py-2">Annuler</a>
+        </div>
+
+
+        {{ form_end(formAddModule) }}
+    </div>
+</div>
+{% endblock %}
