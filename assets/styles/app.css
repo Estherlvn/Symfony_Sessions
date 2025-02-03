@@ -81,7 +81,11 @@ a.nav-link {
 /* HOMEPAGE */
 
 .formatech {
-  color: #8100D6;
+  background: -webkit-linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les anciens navigateurs */
+  background: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les navigateurs modernes */
+  -webkit-background-clip: text; /* Applique le gradient au texte dans les navigateurs WebKit (Chrome, Safari, etc.) */
+  background-clip: text; /* Pour les autres navigateurs */
+  color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
 }
 
 #homeS1 {
@@ -105,3 +109,9 @@ a.nav-link {
   color: #007bff;
 }
 
+
+/******* FORMS ******/
+
+h1 .text-center mb-4 {
+  margin-bottom: 30px;
+}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un formateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center">Ajouter un formateur</h1>
+
+    <div class="card shadow-lg p-4 mt-4">
+        {{ form_start(formAddFormateur, {'attr': {'class': 'needs-validation'}}) }}
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_row(formAddFormateur.nom, {
+                    'label': 'Nom',
+                    'attr': {'class': 'form-control'}
+                }) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(formAddFormateur.prenom, {
+                    'label': 'Prénom',
+                    'attr': {'class': 'form-control'}
+                }) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_row(formAddFormateur.email, {
+                    'label': 'Email',
+                    'attr': {'class': 'form-control'}
+                }) }}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary px-5 py-2">Enregistrer</button>
+            <a href="{{ path('app_formateur') }}" class="btn btn-secondary px-5 py-2">Annuler</a>
+        </div>
+
+        {{ form_end(formAddFormateur) }}
+    </div>
+</div>
+{% endblock %}
