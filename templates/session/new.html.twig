@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ session.id is defined ? 'Modifier la session' : 'Créer une nouvelle session' }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">
+        {{ session.id is defined ? 'Modifier la session' : 'Créer une nouvelle session' }}
+    </h1>
+
+    <div class="card shadow-lg p-4 mt-4 mx-auto" style="max-width: 600px;">
+        {{ form_start(formAddSession, {'attr': {'class': 'needs-validation'}}) }}
+        
+        <div class="mb-3">
+            {{ form_label(formAddSession.intitule, 'Intitulé de la session', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.intitule, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.dateDebut, 'Date de début', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.dateDebut, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.dateFin, 'Date de fin', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.dateFin, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.formation, 'Formation associée', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.formation, {'attr': {'class': 'form-select'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.nbPlace, 'Nombre de places', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.nbPlace, {'attr': {'class': 'form-select'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.formateur, 'Formateur', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formAddSession.formateur, {'attr': {'class': 'form-select'}}) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(formAddSession.stagiaires, 'Stagiaires inscrits', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="form-check">
+                {% for choice in formAddSession.stagiaires %}
+                    <div class="form-check">
+                        {{ form_widget(choice) }}
+                        <label class="form-check-label">{{ choice.vars.label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary px-4 py-2">
+                {{ session.id is defined ? 'Modifier' : 'Enregistrer' }}
+            </button>
+            <a href="{{ path('app_session') }}" class="btn btn-secondary px-4 py-2">Annuler</a>
+        </div>
+
+        {{ form_end(formAddSession) }}
+    </div>
+</div>
+{% endblock %}
