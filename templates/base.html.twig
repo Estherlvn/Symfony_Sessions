@@ -7,6 +7,10 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Karla:ital,wght@0,200..800;1,200..800&family=Kulim+Park:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&family=Mooli&display=swap" rel="stylesheet">
+      
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
@@ -17,16 +21,51 @@
     </head>
     <body>
         <header>
-            <nav>
-                <ul>
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_formations') }}">Formations</a></li>
-                    <li><a href="{{ path('app_sessions') }}">Sessions</a></li>
-                    <li><a href="{{ path('app_formateurs') }}">Formateurs</a></li>
-                    <li><a href="{{ path('app_stagiaires') }}">Stagiaires</a></li>
-                    <li><a href="{{ path('app_modules') }}">Modules</a></li>
+            <nav class="navbar-vertical">
+                
+                <img src="{{ asset('img/launchpad.png') }}" alt="Logo" class="mb-3" width="80">
+
+                <ul class="nav flex-column nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active{% endif %}" 
+                           href="{{ path('app_home') }}">
+                            Accueil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_formations' %}active{% endif %}" 
+                           href="{{ path('app_formations') }}">
+                            Formations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_sessions' %}active{% endif %}" 
+                           href="{{ path('app_sessions') }}">
+                            Sessions
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_formateurs' %}active{% endif %}" 
+                           href="{{ path('app_formateurs') }}">
+                            Formateurs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_stagiaires' %}active{% endif %}" 
+                           href="{{ path('app_stagiaires') }}">
+                            Stagiaires
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_modules' %}active{% endif %}" 
+                           href="{{ path('app_modules') }}">
+                            Modules
+                        </a>
+                    </li>
                 </ul>
             </nav>
+            
+            
         </header>
 
         <main>

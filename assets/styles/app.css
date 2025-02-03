@@ -1,4 +1,30 @@
 body {
-    background-color: rgb(255, 255, 255);
-    font-family: "Work Sans", serif;
+  margin-left: 210px; /* Décale le contenu pour ne pas être sous la navbar */
+  background-color: rgb(255, 255, 255);
+  /* font-family: "Work Sans", serif; */
+  font-family: "Encode Sans Semi Expanded", serif;
+}
+
+.navbar-vertical {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px; /* Largeur de la navbar */
+  height: 100vh; /* Hauteur de l'écran */
+  background-color: #263782;
+  padding-top: 20px;
+}
+
+.navbar-vertical .nav-link {
+  color: white; /* Couleur du texte */
+}
+
+.navbar-vertical .nav-link.active,
+.navbar-vertical .nav-link:hover {
+  background-color: rgba(150, 195, 233, 0.5); /* Effet survol / actif */
+  color: #fff;
+}
+
+main {
+  margin: 100px 150px;
 }

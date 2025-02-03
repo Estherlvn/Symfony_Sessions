@@ -27,6 +27,11 @@
                         <td>{{ session.nbPlace }}</td>
                         <td>{{ session.nbPlacesReservees }}</td>
                         <td>{{ session.nbPlacesRestantes }}</td>
+
+                        <td>
+                            <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir détails</a>
+                        </td>
+
                     </tr>
                 {% endfor %}
             </tbody>
