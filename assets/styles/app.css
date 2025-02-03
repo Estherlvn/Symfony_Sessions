@@ -1,3 +1,5 @@
+/******** GENERAL *******/
+
 body {
   margin-left: 210px; /* Décale le contenu pour ne pas être sous la navbar */
   background-color: rgb(255, 255, 255);
@@ -8,6 +10,16 @@ body {
 main {
   margin: 150px 180px;
 }
+
+h1 {
+  margin-bottom: 50px;
+}
+
+a.li {
+  text-decoration: none;
+}
+
+
 
 
 /************* NAV BARS ***********/
@@ -65,4 +77,31 @@ a.nav-link {
 }
 
 
+
+/* HOMEPAGE */
+
+.formatech {
+  color: #8100D6;
+}
+
+#homeS1 {
+  margin: 70px;
+}
+
+.homeMenu {
+  margin-bottom: 30px;
+}
+
+.homeMenu a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: font-weight 0.3s ease, color 0.3s ease; 
+}
+
+.homeMenu a:hover {
+  font-weight: 600;
+  color: #007bff;
+}
 

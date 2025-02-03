@@ -4,12 +4,27 @@
 
 {% block body %}
 
-    <h1>Bienvenue sur votre tableau de bord, FormaTech</h1>
-    
-    <a href="{{ path('app_sessions') }}">Consulter les sessions à venir</a> <br>
-    <a href="{{ path('app_formateurs') }}">Consulter la liste des formateurs</a> <br>
-    <a href="{{ path('app_stagiaires') }}">Consulter la liste des stagiaires</a> <br>
 
+<div class="homePage">
+
+    <h1>Bienvenue sur votre tableau de bord, <span class="formatech">FormaTech</span></h1>
+
+    <section id="homeS1">
+    <div class="homeMenu">
+        <img src="{{ asset('img/book.png') }}" alt="image de livre pour Sessions" width="35">
+        <a href="{{ path('app_sessions') }}">Consulter les sessions à venir</a>
+    </div>
+    <div class="homeMenu">
+        <img src="{{ asset('img/teach.png') }}" alt="image de professeur pour Formateurs" width="35">
+        <a href="{{ path('app_formateurs') }}">Consulter la liste des formateurs</a>
+    </div>
+    <div class="homeMenu">
+        <img src="{{ asset('img/cap.png') }}" alt="image de chapeau pour Stagiaires" width="35">
+        <a href="{{ path('app_stagiaires') }}">Consulter la liste des stagiaires</a>
+    </div>
+    </section>
+
+</div>
 
 {% endblock %}
 
