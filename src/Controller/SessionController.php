@@ -100,18 +100,8 @@ final class SessionController extends AbstractController
         {
             $stagiaireId = $request->request->get('stagiaireId');
 
-            if (!$stagiaireId) {
-                $this->addFlash('danger', 'Aucun stagiaire sélectionné.');
-                return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
-            }
-
             // Récupérer le stagiaire
             $stagiaire = $stagiaireRepository->find($stagiaireId);
-
-            if (!$stagiaire) {
-                $this->addFlash('danger', 'Le stagiaire sélectionné est introuvable.');
-                return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
-            }
 
             // Ajouter le stagiaire à la session
             if (!$session->getStagiaires()->contains($stagiaire)) {
