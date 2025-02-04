@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -73,6 +74,28 @@ final class SessionController extends AbstractController
     }
 
 
+    
+        // Ajouter une route pour la suppression d'un stagiaire (inscrit dans une session)
+
+        // Utiliser des tirets (-) dans les URLs comme dans "remove-stagiaire"
+        // Dans le nom de la route (name), on garde le snake_case (_)
+        #[Route('/session/{session}/remove-stagiaire/{stagiaire}', name: 'session_remove_stagiaire')]
+
+        public function removeStagiaire(Session $session, Stagiaire $stagiaire, EntityManagerInterface $entityManager): Response
+        {
+            if ($session->getStagiaires()->contains($stagiaire)) {
+                $session->removeStagiaire($stagiaire);
+                $entityManager->persist($session);
+                $entityManager->flush();
+        
+                $this->addFlash('success', 'Le stagiaire a été retiré de la session.');
+            } else {
+                $this->addFlash('warning', 'Ce stagiaire ne fait pas partie de cette session.');
+            }
+        
+            return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
+        }
+        
 
 }
 

@@ -54,13 +54,22 @@
                     <tr>
                         <td>{{ stagiaire.nom }}</td>
                         <td>{{ stagiaire.email }}</td>
+                        <td>
+                            <a href="{{ path('session_remove_stagiaire', {'session': session.id, 'stagiaire': stagiaire.id}) }}"
+                               class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Voulez-vous vraiment retirer ce stagiaire de la session ?');">
+                                Supprimer
+                            </a>
+                        </td>
                     </tr>
+                    
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
         <p>Aucun stagiaire inscrit pour cette session.</p>
     {% endif %}
+
     
 
 {% endblock %}
