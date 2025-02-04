@@ -38,6 +38,22 @@
         <p>Aucun module trouvé pour cette session.</p>
     {% endif %}
 
+
+    {# Formulaire pour ajouter un stagiaire #}
+    <h3>Ajouter un stagiaire</h3>
+    <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
+        <div class="form-group">
+            <label for="stagiaire">Sélectionner un stagiaire :</label>
+            <select name="stagiaireId" id="stagiaire" class="form-control">
+                {% for stagiaire in stagiairesNonInscrits %}
+                    <option value="{{ stagiaire.id }}">{{ stagiaire.nom }} - {{ stagiaire.email }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Ajouter</button>
+    </form>
+    
+    
         
     {# Tableau des stagiaires inscrits dans la session #}
     {% if session.stagiaires is not empty %}
@@ -62,7 +78,7 @@
                             </a>
                         </td>
                     </tr>
-                    
+
                 {% endfor %}
             </tbody>
         </table>
