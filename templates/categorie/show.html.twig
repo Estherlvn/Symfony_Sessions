@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Liste des formations d'une catégorie{% endblock %}
+
+{% block body %}
+
+    <h2>Liste des formations pour la catégorie : {{ categorie.nomCategorie }}</h2>
+
+    {% if categorie.formations is not empty %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom de la formation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for formation in categorie.formations %}
+                    <tr>
+                        <td>{{ formation.nomFormation }}</td> 
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune formation trouvée pour cette catégorie.</p>
+    {% endif %}
+
+    <a href="{{ path('app_categories') }}">Retour à la liste des catégories</a>
+
+{% endblock %}

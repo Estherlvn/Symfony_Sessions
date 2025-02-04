@@ -19,7 +19,7 @@ final class FormationController extends AbstractController
         ]);
     }
 
-
+    // Pour faire afficher les détails d'une formation
     #[Route('/formations/{id}', name: 'app_formation_show')]
     public function show(int $id, FormationRepository $formationRepository): Response
     {
