@@ -40,6 +40,10 @@
         <p>Aucune session à venir.</p>
     {% endif %}
 
-    <a href="{{ path('new_session') }}">Ajouter une session</a>
+    {# <a href="{{ path('new_session') }}">Ajouter une session</a> #}
+    <a href="{{ path('new_session') }}" class="button-64" role="button">
+        <span class="text">Ajouter une session</span>
+    </a>
+    
 
 {% endblock %}

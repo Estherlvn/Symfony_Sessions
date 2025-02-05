@@ -15,14 +15,23 @@ h1 {
   margin-bottom: 50px;
 }
 
+h2 {
+  margin-bottom: 50px;
+}
+
 h3 {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
-a.li {
+a {
   text-decoration: none;
+  color: black;
 }
 
+.titleP {
+  font-weight: 500;
+  font-size: 1.3em;
+}
 
 
 
@@ -119,3 +128,100 @@ a.nav-link {
 h1 .text-center mb-4 {
   margin-bottom: 30px;
 }
+
+.form-group{
+  margin-top: 20px;
+}
+
+#stagiaire{
+  margin: 10px 0
+}
+
+/****PAGE SESSION******/
+
+/* 
+.section-principale {
+  width: 50%;
+} */
+
+.sectionForm {
+  width: 30%;
+  border: solid 1px rgba(0, 0, 0, 0.4); /* Bordure noire avec 60% de transparence */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  border-radius: 2px;
+}
+
+
+/******BUTTONS**********/
+
+.backBtn {
+  width: 30%;
+  border: solid 1px transparent; /* rendre la bordure transparente pour appliquer le gradient */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 2px;
+  /* Appliquer le gradient à la bordure */
+  border-image: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2) 1; 
+}
+
+a.backBtn {
+  background: -webkit-linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les anciens navigateurs */
+  background: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les navigateurs modernes */
+  -webkit-background-clip: text; /* Applique le gradient au texte dans les navigateurs WebKit (Chrome, Safari, etc.) */
+  background-clip: text; /* Pour les autres navigateurs */
+  color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
+}
+
+
+.button-64 {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  line-height: 1em;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  width: 15%;
+}
+
+.button-64:active,
+.button-64:hover {
+  outline: 0;
+}
+
+.button-64 span {
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background-color: rgb(5, 6, 45);
+}
+
+/* @media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px;
+  }
+} */

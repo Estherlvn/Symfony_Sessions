@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h2>Liste des modules pour la catégorie : {{ categorie.nomCategorie }}</h2>
+    <h2>{{ categorie.nomCategorie }}</h2>
 
     {% if categorie.modules is not empty %}
         <table class="table table-striped">
@@ -26,6 +26,9 @@
         <p>Aucune formation trouvée pour cette catégorie.</p>
     {% endif %}
 
-    <a href="{{ path('app_categories') }}">Retour à la liste des catégories</a>
+    <a class="backBtn" href="{{ path('app_categories') }}">
+        Retour à la liste des catégories
+    </a>
+
 
 {% endblock %}

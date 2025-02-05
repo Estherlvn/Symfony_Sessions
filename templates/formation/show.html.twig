@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h2>Liste des sessions pour la formation : {{ formation.nomFormation }}</h2>
+    <h2>{{ formation.nomFormation }}</h2>
 
     {% if formation.sessions is not empty %}
         <table class="table table-striped">
@@ -52,6 +52,8 @@
         <p>Aucune session trouvée pour cette formation.</p>
     {% endif %}
 
-    <a href="{{ path('app_formations') }}">Retour à la liste des formations</a>
+    <a class="backBtn" href="{{ path('app_formations') }}">
+        Retour à la liste des formations
+    </a>
 
 {% endblock %}

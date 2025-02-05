@@ -4,12 +4,14 @@
 
 {% block body %}
 
-    <h1>Modules pour la session: <br> {{ session.intitule }}</h1>
+    <h1>{{ session.intitule }}</h1>
 
-    <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
+
+    <a class="backBtn" href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
         Retour aux sessions de la formation
     </a>
-
+    
+    
 
     {#}Tableau des modules de la session{#}
     {% if session.programmes is not empty %}
@@ -38,23 +40,25 @@
         <p>Aucun module trouvé pour cette session.</p>
     {% endif %}
 
-
-    {# Formulaire pour ajouter un stagiaire #}
-    <h3>Ajouter un stagiaire</h3>
-    <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
-        <div class="form-group">
-            <label for="stagiaire">Sélectionner un stagiaire :</label>
-            <select name="stagiaireId" id="stagiaire" class="form-control">
-                {% for stagiaire in stagiairesNonInscrits %}
-                    <option value="{{ stagiaire.id }}">{{ stagiaire.nom }} - {{ stagiaire.email }}</option>
-                {% endfor %}
-            </select>
+     {# Formulaire pour ajouter un stagiaire #}
+     <div class="sectionForm">
+        <p class="titleP">Ajouter un stagiaire</p>
+        <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
+            <div class="form-group">
+                <label for="stagiaire">Sélectionner dans la liste :</label>
+                <select name="stagiaireId" id="stagiaire" class="form-control">
+                    {% for stagiaire in stagiairesNonInscrits %}
+                        <option value="{{ stagiaire.id }}">{{ stagiaire.nom }} - {{ stagiaire.email }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>
+        </form>
         </div>
-        <button type="submit" class="btn btn-success mt-2">Ajouter</button>
-    </form>
-    
-    
+
+
     {# Tableau des stagiaires inscrits dans la session #}
+    <div class="section-principale">
     {% if session.stagiaires is not empty %}
     <h3>Stagiaires inscrits</h3>
     <table class="table table-striped">
@@ -85,6 +89,7 @@
     {% else %}
         <p>Aucun stagiaire inscrit pour cette session.</p>
     {% endif %}
+    </div>
 
 
     {# Tableau des stagiaires non inscrits dans la session #}
