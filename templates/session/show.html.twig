@@ -4,12 +4,16 @@
 
 {% block body %}
 
-    <h1>{{ session.intitule }}</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
 
-    
+
+    <h1>{{ session.intitule }}</h1>
     <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}" class="backBtn" role="button">
         <span class="text">Retour aux sessions de la formation</span>
     </a>
+    
+</div>
+
     
 
     {#}Tableau des modules de la session{#}

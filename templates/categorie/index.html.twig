@@ -2,23 +2,31 @@
 
 {% block title %}Liste des catégories{% endblock %}
 
-
 {% block body %}
 
 
-    <h1>Liste des catégories</h1>
+<div class="container mt-4">
+    <h1 class="mb-5 text-center">Liste des catégories</h1>
 
-    <ul>
+    <div class="row mb-5">
         {% for categorie in categories %}
-            <li>
-                <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">
-                    {{ categorie.nomCategorie }}
-                </a>
-            </li>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ categorie.nomCategorie }}</h5>
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-outline-primary btn-sm">Voir les détails</a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <li>Aucune catégorie trouvée.</li>
+            <div class="col-12">
+                <div class="alert alert-warning text-center" role="alert">
+                    Aucune catégorie trouvée.
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+</div>
 
-    
 {% endblock %}
+

@@ -5,17 +5,21 @@
 {% block body %}
 
 
-<h1>Nos formations</h1>
+<div class="container mt-4">
+    <h1 class="mb-5 text-center">Nos formations</h1>
 
-<ul>
-    {% for formation in formations %}
-        <li>
-            <a href="{{ path('app_formation_show', {'id': formation.id}) }}">
-                {{ formation.nomFormation }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
-
-
+    <!-- Ajout d'un espace entre le titre et les cartes -->
+    <div class="row mb-5">
+        {% for formation in formations %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ formation.nomFormation }}</h5>
+                        <a href="{{ path('app_formation_show', {'id': formation.id}) }}" class="btn btn-outline-primary btn-sm">Voir le contenu</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

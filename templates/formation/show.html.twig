@@ -4,7 +4,13 @@
 
 {% block body %}
 
+<div class="d-flex justify-content-between align-items-center mb-3">
     <h2>{{ formation.nomFormation }}</h2>
+    <a href="{{ path('app_formations') }}" class="backBtn" role="button">
+        <span class="text">Retour à la liste des formations</span>
+    </a>
+</div>
+
 
     {% if formation.sessions is not empty %}
         <table class="table table-striped">
@@ -53,8 +59,6 @@
     {% endif %}
 
 
-    <a href="{{ path('app_formations') }}" class="backBtn" role="button">
-        <span class="text">Retour à la liste des formations</span>
-    </a>
+  
 
 {% endblock %}

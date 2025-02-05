@@ -4,7 +4,17 @@
 
 {% block body %}
 
-    <h1>Sessions à venir</h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h1>Sessions à venir</h1>
+
+        <a href="{{ path('new_session') }}" class="button-64" role="button">
+            <span class="text">Ajouter une session</span>
+        </a>
+        
+    </div>
+        
 
     {% if sessions is not empty %}
         <table class="table table-striped">
@@ -40,10 +50,5 @@
         <p>Aucune session à venir.</p>
     {% endif %}
 
-    {# <a href="{{ path('new_session') }}">Ajouter une session</a> #}
-    <a href="{{ path('new_session') }}" class="button-64" role="button">
-        <span class="text">Ajouter une session</span>
-    </a>
-    
 
 {% endblock %}
