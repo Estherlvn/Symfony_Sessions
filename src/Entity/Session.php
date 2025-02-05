@@ -29,8 +29,11 @@ class Session
     private ?int $nbPlace = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
-    #[ORM\JoinColumn(nullable: false)]
+    // Avec onDelete: 'CASCADE', si une session est supprimée,
+    // doctrine s'assure qu'elle disparaît sans essayer de modifier formation_id.
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Formation $formation = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]

@@ -17,10 +17,12 @@
                     <th>Places réservées</th>
                     <th>Places restantes</th>
                     <th>Détail</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for session in formation.sessions %}
+                
                     <tr>
                         <td>{{ session.intitule }}</td>
                         <td>{{ session.dateDebut|date('d/m/Y') }}</td>
@@ -28,10 +30,19 @@
                         <td>{{ session.nbPlace }}</td>
                         <td>{{ session.nbPlacesReservees }}</td>
                         <td>{{ session.nbPlacesRestantes }}</td>
-                    
+
                         <td>
                             <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir détails</a>
                         </td>
+                        <td>
+
+                            <a href="{{ path('formation_remove_session', {'formation': formation.id, 'session': session.id}) }}"
+                               class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Voulez-vous vraiment supprimer cette session de la formation ?');">
+                                Supprimer
+                            </a>
+                        </td>
+                    
                     </tr>
                 {% endfor %}
             </tbody>

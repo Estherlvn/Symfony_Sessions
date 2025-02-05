@@ -66,13 +66,9 @@ class Formation
 
     public function removeSession(Session $session): static
     {
-        if ($this->sessions->removeElement($session)) {
-            // set the owning side to null (unless already changed)
-            if ($session->getFormation() === $this) {
-                $session->setFormation(null);
-            }
-        }
-
+        $this->sessions->removeElement($session);
         return $this;
     }
+    
 }
+
