@@ -39,6 +39,16 @@
         <p>Aucun module trouvé pour cette session.</p>
     {% endif %}
 
+
+     {# Formulaire pour ajouter un nouveau programme dans la session #}
+    <h3>Ajouter un nouveau programme</h3>
+    {{ form_start(form) }}
+        {{ form_row(form.module) }}
+        {{ form_row(form.nbJour) }}
+        <button type="submit">Ajouter le programme</button>
+    {{ form_end(form) }}
+
+
      {# Formulaire pour ajouter un stagiaire #}
      <div class="sectionForm">
         <p class="titleP">Ajouter un stagiaire</p>

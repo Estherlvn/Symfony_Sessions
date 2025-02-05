@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
+use App\Form\ProgrammeType;
+use App\Repository\ModuleRepository;
 use App\Repository\SessionRepository;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,22 +33,6 @@ final class SessionController extends AbstractController
             ]);
         }
     
-
-     // AFFICHER le résulat des requetes DQL (dans les repository) => stagiairesNonInscrits, sessionsNonProgrammes
-        // id<\d+> signifie que l'ID doit être un nombre (\d+ = chiffres uniquement) => Cela empêche Symfony de confondre /session/new avec /session/{id}
-        #[Route('/session/{id<\d+>}', name: 'app_session_show')]
-        public function show(Session $session = null, StagiaireRepository $sr): Response // $sr = stagiaireRepository
-        {
-            // Récupérer les stagiaires non inscrits dans cette session
-            $stagiairesNonInscrits = $sr->findStagiairesNonInscrits($session->getId());
-            // $sessionsNonProgrammes = $sr->findSessionsNonProgrammes($session->getId());
-
-            return $this->render('session/show.html.twig', [
-                'session' => $session,
-                'stagiairesNonInscrits' => $stagiairesNonInscrits,
-                // 'sessionsNonProgrammes' => $sessionsNonProgrammes,
-            ]);
-        }
 
     // CREER une nouvelle session ou modifier une session existante
         #[Route('/session/new', name: 'new_session')]
@@ -75,7 +63,6 @@ final class SessionController extends AbstractController
                 'formAddSession' => $form,
             ]);
         }
-
 
 
     // SUPPRESSION d'un stagiaire inscrit dans une session donnée
@@ -121,7 +108,65 @@ final class SessionController extends AbstractController
             return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
         }
 
+     
+    // Affichage de la session et des stagiaires non inscrits, création du programme
+    #[Route('/session/{id<\d+>}', name: 'app_session_show')]
+    public function show(
+        Session $session,
+        StagiaireRepository $sr,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        // 1️⃣ Récupérer les stagiaires non inscrits
+        $stagiairesNonInscrits = $sr->findStagiairesNonInscrits($session->getId());
+    
+        // 2️⃣ Créer le formulaire pour ajouter un programme
+        $form = $this->createForm(ProgrammeType::class, new Programme());
+    
+        // 3️⃣ Gérer la création du programme et récupérer la réponse du formulaire
+        $response = $this->handleProgrammeCreation($session, $request, $entityManager, $form);
+    
+        if ($response instanceof Response) {
+            return $response; // Redirection si le formulaire a été soumis et validé
+        }
+    
+        // 4️⃣ Rendre la vue avec le formulaire
+        return $this->render('session/show.html.twig', [
+            'session' => $session,
+            'stagiairesNonInscrits' => $stagiairesNonInscrits,
+            'form' => $form->createView(),
+        ]);
+    }
+    
 
+    // Création d'un nouveau programme pour une session
+    private function handleProgrammeCreation(
+        Session $session,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        FormInterface $form // Ajouter le formulaire passé de la méthode show
+    ): ?Response {
+        $form->handleRequest($request); // Utiliser directement le formulaire passé
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Créer un objet Programme à partir des données du formulaire
+            $programme = $form->getData();
+            
+            // Associer le programme à la session via la méthode addProgramme
+            $session->addProgramme($programme);
+    
+            // Enregistrer le programme en base de données
+            $entityManager->persist($programme);
+            $entityManager->flush();
+    
+            // Ajouter un message flash de succès
+            $this->addFlash('success', 'Le programme a été ajouté avec succès.');
+    
+            // Redirection après ajout du programme
+            return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
+        }
+    
+        return null; // Retourner null si le formulaire n'est pas soumis ou valide
+    }
+    
 }
-
-
