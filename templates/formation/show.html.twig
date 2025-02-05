@@ -52,8 +52,9 @@
         <p>Aucune session trouvée pour cette formation.</p>
     {% endif %}
 
-    <a class="backBtn" href="{{ path('app_formations') }}">
-        Retour à la liste des formations
+
+    <a href="{{ path('app_formations') }}" class="backBtn" role="button">
+        <span class="text">Retour à la liste des formations</span>
     </a>
 
 {% endblock %}

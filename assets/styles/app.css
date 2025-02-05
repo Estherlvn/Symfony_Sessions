@@ -190,7 +190,7 @@ a.backBtn {
   color: #FFFFFF;
   display: flex;
   justify-content: center;
-  line-height: 1em;
+  line-height: 0.5em;
   padding: 3px;
   text-decoration: none;
   user-select: none;

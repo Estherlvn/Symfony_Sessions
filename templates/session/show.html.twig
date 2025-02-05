@@ -6,11 +6,10 @@
 
     <h1>{{ session.intitule }}</h1>
 
-
-    <a class="backBtn" href="{{ path('app_formation_show', {'id': session.formation.id}) }}">
-        Retour aux sessions de la formation
-    </a>
     
+    <a href="{{ path('app_formation_show', {'id': session.formation.id}) }}" class="backBtn" role="button">
+        <span class="text">Retour aux sessions de la formation</span>
+    </a>
     
 
     {#}Tableau des modules de la session{#}
