@@ -133,8 +133,12 @@ h1 .text-center mb-4 {
   margin-top: 20px;
 }
 
-#stagiaire{
-  margin: 10px 0
+#labelStag {
+  margin: 10px 0;
+}
+
+#labelProg {
+  margin: 10px 0;
 }
 
 /****PAGE SESSION******/

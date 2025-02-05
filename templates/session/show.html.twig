@@ -20,6 +20,7 @@
                 <tr>
                     <th>Intitulé</th>
                     <th>Durée</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,14 @@
                             {#}afficher "jour" au singulier si nbJour = "1". Sinon afficher "jours"{#}
                             {{ programme.nbJour == 1 ? 'jour' : 'jours' }} 
                         </td>
+            
+                        <td>
+                             <a href="{{ path('app_session_remove_programme', { 'id': session.id, 'programme_id': programme.id }) }}"
+                               class="btn btn-outline-danger btn-sm"
+                               onclick="return confirm('Voulez-vous vraiment retirer ce module de la session ?');">
+                                Supprimer
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -40,13 +49,24 @@
     {% endif %}
 
 
-     {# Formulaire pour ajouter un nouveau programme dans la session #}
-    <h3>Ajouter un nouveau programme</h3>
-    {{ form_start(form) }}
-        {{ form_row(form.module) }}
-        {{ form_row(form.nbJour) }}
-        <button type="submit">Ajouter le programme</button>
-    {{ form_end(form) }}
+    {# Formulaire pour ajouter un nouveau programme dans la session #}
+    <div class="sectionForm">
+        <p class="titleP">Ajouter un nouveau programme</p>
+        <form method="post" action="{{ path('app_session_show', {'id': session.id}) }}">
+            <div class="form-group" id="labelProg">
+                {{ form_start(form) }}
+                
+                <label for="programme_module"  >Module</label>
+                {{ form_widget(form.module, {'attr': {'class': 'form-control', 'id': 'programme_module'}}) }}
+    
+                <label for="programme_nbJour">Nombre de jours</label>
+                {{ form_widget(form.nbJour, {'attr': {'class': 'form-control', 'id': 'programme_nbJour'}}) }}
+
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>
+            {{ form_end(form) }}
+        </form>
+    </div>
 
 
      {# Formulaire pour ajouter un stagiaire #}
@@ -55,7 +75,7 @@
         <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
             <div class="form-group">
                 <label for="stagiaire">Sélectionner dans la liste :</label>
-                <select name="stagiaireId" id="stagiaire" class="form-control">
+                <select name="stagiaireId" id="labelStag" class="form-control">
                     {% for stagiaire in stagiairesNonInscrits %}
                         <option value="{{ stagiaire.id }}">{{ stagiaire.nom }} - {{ stagiaire.email }}</option>
                     {% endfor %}

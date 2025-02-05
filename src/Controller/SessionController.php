@@ -137,7 +137,8 @@ final class SessionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
+
 
     // Création d'un nouveau programme pour une session
     private function handleProgrammeCreation(
@@ -169,4 +170,48 @@ final class SessionController extends AbstractController
         return null; // Retourner null si le formulaire n'est pas soumis ou valide
     }
     
+
+    
+    // Méthode pour supprimer un programme de la session
+    #[Route('/session/{id<\d+>}/programme/{programme_id<\d+>}/remove', name: 'app_session_remove_programme')]
+    public function removeProgramme(
+        Session $session,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        return $this->handleProgrammeRemoval($session, $request, $entityManager);
+    }
+        
+    // Méthode pour supprimer un programme de la session
+        private function handleProgrammeRemoval(
+            Session $session,
+            Request $request,
+            EntityManagerInterface $entityManager
+        ): ?Response {
+            // Récupérer l'ID du programme à supprimer depuis les paramètres de la requête
+            $programmeId = $request->get('programme_id'); // Assurez-vous que vous passez l'ID dans la requête, ex. ?programme_id=123
+            
+            // Trouver le programme dans la base de données
+            $programme = $entityManager->getRepository(Programme::class)->find($programmeId);
+            
+            if (!$programme) {
+                // Si le programme n'existe pas, retourner une erreur
+                $this->addFlash('error', 'Le programme n\'existe pas.');
+                return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
+            }
+            
+            // Supprimer le programme de la session
+            $session->removeProgramme($programme);
+            
+            // Supprimer le programme de la base de données
+            $entityManager->remove($programme);
+            $entityManager->flush();
+            
+            // Ajouter un message flash de succès
+            $this->addFlash('success', 'Le programme a été supprimé avec succès.');
+            
+            // Rediriger vers la page de la session après la suppression
+            return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
+        }
+
 }
