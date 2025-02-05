@@ -13,7 +13,7 @@
 
     {#}Tableau des modules de la session{#}
     {% if session.programmes is not empty %}
-    <h3>Modules enregistrés</h3>
+    <h3>Modules de la session</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -39,7 +39,7 @@
     {% endif %}
 
 
-    Formulaire pour ajouter un stagiaire
+    {# Formulaire pour ajouter un stagiaire #}
     <h3>Ajouter un stagiaire</h3>
     <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
         <div class="form-group">
