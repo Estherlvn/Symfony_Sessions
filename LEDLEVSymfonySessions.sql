@@ -22,11 +22,11 @@ USE `ledlevsymfonysessions`;
 -- Listage de la structure de table ledlevsymfonysessions. categorie
 CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom_categorie` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_categorie` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.categorie : ~4 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.categorie : ~5 rows (environ)
 INSERT INTO `categorie` (`id`, `nom_categorie`) VALUES
 	(1, 'Bureautique'),
 	(2, 'Développement web'),
@@ -36,36 +36,37 @@ INSERT INTO `categorie` (`id`, `nom_categorie`) VALUES
 
 -- Listage de la structure de table ledlevsymfonysessions. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.doctrine_migration_versions : ~0 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.doctrine_migration_versions : ~1 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20250128140745', '2025-01-28 14:08:10', 1003);
 
 -- Listage de la structure de table ledlevsymfonysessions. formateur
 CREATE TABLE IF NOT EXISTS `formateur` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prenom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.formateur : ~4 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.formateur : ~5 rows (environ)
 INSERT INTO `formateur` (`id`, `nom`, `prenom`, `email`) VALUES
 	(1, 'LEDOYEN', 'Daniel', 'daniel@formatech.com'),
 	(2, 'LEJEUNE', 'Christelle', 'christelle@formatech.com'),
 	(3, 'NARCISSE', 'Roger', 'roger@formatech.com'),
-	(4, 'SERAN', 'Gregoire', 'gregoire@formatech.com');
+	(4, 'SERAN', 'Gregoire', 'gregoire@formatech.com'),
+	(5, 'TEST', 'Formateur', 'formateur@exemple.fr');
 
 -- Listage de la structure de table ledlevsymfonysessions. formation
 CREATE TABLE IF NOT EXISTS `formation` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom_formation` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_formation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -81,9 +82,9 @@ INSERT INTO `formation` (`id`, `nom_formation`) VALUES
 -- Listage de la structure de table ledlevsymfonysessions. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -99,13 +100,13 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
 CREATE TABLE IF NOT EXISTS `module` (
   `id` int NOT NULL AUTO_INCREMENT,
   `categorie_id` int DEFAULT NULL,
-  `nom_module` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_module` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C242628BCF5E72D` (`categorie_id`),
   CONSTRAINT `FK_C242628BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.module : ~23 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.module : ~26 rows (environ)
 INSERT INTO `module` (`id`, `categorie_id`, `nom_module`) VALUES
 	(1, 1, 'Word'),
 	(2, 1, 'Excel'),
@@ -130,7 +131,9 @@ INSERT INTO `module` (`id`, `categorie_id`, `nom_module`) VALUES
 	(21, 4, 'Gestion de stocks'),
 	(22, 5, 'Communication'),
 	(23, 5, 'Teambuilding'),
-	(24, 5, 'Gestion des ressources');
+	(24, 5, 'Gestion des ressources'),
+	(26, 3, 'Test ajout module'),
+	(27, 5, 'Test ajout module 2');
 
 -- Listage de la structure de table ledlevsymfonysessions. programme
 CREATE TABLE IF NOT EXISTS `programme` (
@@ -143,9 +146,9 @@ CREATE TABLE IF NOT EXISTS `programme` (
   KEY `IDX_3DDCB9FFAFC2B591` (`module_id`),
   CONSTRAINT `FK_3DDCB9FF613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`),
   CONSTRAINT `FK_3DDCB9FFAFC2B591` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.programme : ~11 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.programme : ~14 rows (environ)
 INSERT INTO `programme` (`id`, `session_id`, `module_id`, `nb_jour`) VALUES
 	(1, 1, 4, 3),
 	(2, 1, 5, 1),
@@ -157,14 +160,17 @@ INSERT INTO `programme` (`id`, `session_id`, `module_id`, `nb_jour`) VALUES
 	(8, 3, 22, 2),
 	(9, 4, 22, 2),
 	(10, 4, 23, 3),
-	(11, 4, 24, 4);
+	(11, 4, 24, 4),
+	(21, 1, 18, 2),
+	(22, 1, 13, 2),
+	(24, 3, 3, 1);
 
 -- Listage de la structure de table ledlevsymfonysessions. session
 CREATE TABLE IF NOT EXISTS `session` (
   `id` int NOT NULL AUTO_INCREMENT,
   `formation_id` int NOT NULL,
   `formateur_id` int NOT NULL,
-  `intitule` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intitule` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_debut` date NOT NULL,
   `date_fin` date NOT NULL,
   `nb_place` int NOT NULL,
@@ -172,8 +178,8 @@ CREATE TABLE IF NOT EXISTS `session` (
   KEY `IDX_D044D5D45200282E` (`formation_id`),
   KEY `IDX_D044D5D4155D8F51` (`formateur_id`),
   CONSTRAINT `FK_D044D5D4155D8F51` FOREIGN KEY (`formateur_id`) REFERENCES `formateur` (`id`),
-  CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table ledlevsymfonysessions.session : ~4 rows (environ)
 INSERT INTO `session` (`id`, `formation_id`, `formateur_id`, `intitule`, `date_debut`, `date_fin`, `nb_place`) VALUES
@@ -193,28 +199,38 @@ CREATE TABLE IF NOT EXISTS `session_stagiaire` (
   CONSTRAINT `FK_C80B23BBBA93DD6` FOREIGN KEY (`stagiaire_id`) REFERENCES `stagiaire` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~2 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~9 rows (environ)
 INSERT INTO `session_stagiaire` (`session_id`, `stagiaire_id`) VALUES
-	(1, 1),
-	(1, 2);
+	(1, 4),
+	(1, 7),
+	(1, 8),
+	(2, 7),
+	(2, 8),
+	(3, 2),
+	(3, 3),
+	(3, 4),
+	(4, 7);
 
 -- Listage de la structure de table ledlevsymfonysessions. stagiaire
 CREATE TABLE IF NOT EXISTS `stagiaire` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prenom` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_naissance` date NOT NULL,
-  `ville` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telephone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.stagiaire : ~2 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.stagiaire : ~6 rows (environ)
 INSERT INTO `stagiaire` (`id`, `nom`, `prenom`, `date_naissance`, `ville`, `email`, `telephone`) VALUES
-	(1, 'MARCHAND', 'Maxime', '1988-01-21', 'STRASBOURG', 'maxime@stagiaire.com', '0645796525'),
-	(2, 'LOYAL', 'Clara', '2000-02-23', 'MULHOUSE', 'clara@stagiaire.com', '0645963521'),
-	(3, 'FRAISE', 'Guillaume', '1997-07-17', 'STRASBOURG', 'guillaume@stagiaire.com', '0645852535');
+	(1, 'MARCHAND', 'Maxime', '1988-01-21', 'STRASBOURG', 'maxime@stagiaire.fr', '0645796525'),
+	(2, 'LOYAL', 'Clara', '2000-02-23', 'MULHOUSE', 'clara@stagiaire.fr', '0645963521'),
+	(3, 'FRAISE', 'Guillaume', '1997-07-17', 'STRASBOURG', 'guillaume@stagiaire.fr', '0645852535'),
+	(4, 'LAFORET', 'Marie', '2000-02-08', 'MULHOUSE', 'marie@stagiaire.fr', '0689632541'),
+	(7, 'LEDOUX', 'Esther', '1993-11-07', 'CESSON SEVIGNE', 'estherlvn@gmail.com', '0645748032'),
+	(8, 'Bgra', 'Seif', '2001-05-30', 'Boumerdes', 'seif@exemple.fr', '0256485963');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
