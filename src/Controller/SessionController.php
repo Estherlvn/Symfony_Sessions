@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class SessionController extends AbstractController
 {
 
+    // Afficher toutes les sessions de la BDD
         #[Route('/session', name: 'app_session')]
         public function index(SessionRepository $sessionRepository): Response
         {
@@ -29,24 +30,27 @@ final class SessionController extends AbstractController
         }
     
 
-        #[Route('/session/{id}', name: 'app_session_show')]
-        public function show(Session $session, StagiaireRepository $stagiaireRepository): Response
+     // AFFICHER le résulat des requetes DQL (dans les repository) => stagiairesNonInscrits, sessionsNonProgrammes
+        // id<\d+> signifie que l'ID doit être un nombre (\d+ = chiffres uniquement) => Cela empêche Symfony de confondre /session/new avec /session/{id}
+        #[Route('/session/{id<\d+>}', name: 'app_session_show')]
+        public function show(Session $session = null, StagiaireRepository $sr): Response // $sr = stagiaireRepository
         {
             // Récupérer les stagiaires non inscrits dans cette session
-            $stagiairesNonInscrits = $stagiaireRepository->findStagiairesNonInscrits($session->getId());
+            $stagiairesNonInscrits = $sr->findStagiairesNonInscrits($session->getId());
+            // $sessionsNonProgrammes = $sr->findSessionsNonProgrammes($session->getId());
 
             return $this->render('session/show.html.twig', [
                 'session' => $session,
                 'stagiairesNonInscrits' => $stagiairesNonInscrits,
+                // 'sessionsNonProgrammes' => $sessionsNonProgrammes,
             ]);
         }
 
-        // Créer une nouvelle session ou modifier une session existante
+    // CREER une nouvelle session ou modifier une session existante
         #[Route('/session/new', name: 'new_session')]
         #[Route('/session/{id}/edit', name: 'edit_session')]
         public function new_session(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
         {
-
             if(!$session) { 
                 $session = new Session();
             }
@@ -73,7 +77,8 @@ final class SessionController extends AbstractController
         }
 
 
-        // SUPPRESSION d'un stagiaire (inscrit dans une session donnée)
+
+    // SUPPRESSION d'un stagiaire inscrit dans une session donnée
         // Utiliser des tirets (-) dans les URLs comme dans "remove-stagiaire"
         // Dans le nom de la route (name), on garde le snake_case (_)
         #[Route('/session/{session}/remove-stagiaire/{stagiaire}', name: 'session_remove_stagiaire')]
@@ -92,9 +97,8 @@ final class SessionController extends AbstractController
             return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
         }
 
-
         
-        // AJOUT d'un stagiaire dans une session donnée
+    // AJOUT d'un stagiaire dans une session donnée
         #[Route('/session/{id}/add-stagiaire', name: 'session_add_stagiaire', methods: ['POST'])]
         public function addStagiaire(Session $session, Request $request, EntityManagerInterface $entityManager, StagiaireRepository $stagiaireRepository): Response
         {
@@ -116,7 +120,6 @@ final class SessionController extends AbstractController
 
             return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
         }
-
 
 
 }
