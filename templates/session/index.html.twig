@@ -7,8 +7,17 @@
 {% block body %}
 
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h1>Toutes les Sessions</h1>
+
+    <a href="{{ path('new_session') }}" class="button-64" role="button">
+        <span class="text">Ajouter une session</span>
+    </a>
+
+</div>
+
 <div class="container mt-4">
-    <h1 class="mb-6 text-left">Toutes les Sessions</h1>
 
     {% set categories = {
         'Sessions en cours': sessionsEnCours,

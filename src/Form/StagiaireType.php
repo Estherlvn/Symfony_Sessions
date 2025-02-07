@@ -22,13 +22,13 @@ class StagiaireType extends AbstractType
             ->add('ville')
             ->add('email')
             ->add('telephone')
-            ->add('sessions', EntityType::class, [
-                'class' => Session::class,
-                'choice_label' => 'intitule', // Nom de la session affiché
-                'multiple' => true, // Choix multiples
-                'expanded' => true, // Transforme en checkboxes
-                'by_reference' => false, // Permet à Symfony d'appeler addSession() et removeSession() automatiquement
-            ])
+            // ->add('sessions', EntityType::class, [
+            //     'class' => Session::class,
+            //     'choice_label' => 'intitule', // Nom de la session affiché
+            //     'multiple' => true, // Choix multiples
+            //     'expanded' => true, // Transforme en checkboxes
+            //     'by_reference' => false, // Permet à Symfony d'appeler addSession() et removeSession() automatiquement
+            // ])
             
         ;
     }

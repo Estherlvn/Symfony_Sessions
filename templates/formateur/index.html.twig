@@ -3,18 +3,30 @@
 {% block title %}Liste des formateurs{% endblock %}
 
 {% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4 text-left">Liste des formateurs</h1>
 
-    <h1>Liste des formateurs</h1>
+        <div class="row">
+            {% for formateur in formateurs %}
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a  class="text-decoration-none text-dark">
+                                    {{ formateur.nom }} {{ formateur.prenom }}
+                                </a>
+                            </h5>
+                            <p class="card-text"><strong>Email:</strong> {{ formateur.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-    {% for formateur in formateurs %}
-
-    <li>{{ formateur.nom }} {{ formateur.prenom }} - {{ formateur.email }}</li>
-
-    {% endfor %}
-
-
-    <a href="{{ path('new_formateur') }}" class="button-64" role="button">
-        <span class="text">Ajouter un formateur</span>
-    </a>
-
+        <div class="text-right mt-4">
+            <a href="{{ path('new_formateur') }}" class="btn btn-outline-success btn-sm">
+                Ajouter un formateur
+            </a>
+        </div>
+    </div>
 {% endblock %}
