@@ -16,7 +16,11 @@ h1 {
 }
 
 h2 {
-  margin-bottom: 50px;
+  background: -webkit-linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les anciens navigateurs */
+  background: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les navigateurs modernes */
+  -webkit-background-clip: text; /* Applique le gradient au texte dans les navigateurs WebKit (Chrome, Safari, etc.) */
+  background-clip: text; /* Pour les autres navigateurs */
+  color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
 }
 
 h3 {
@@ -126,6 +130,15 @@ a.nav-link {
   color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
 }
 
+
+/******SESSION*******/
+.sessionTab {
+  margin-bottom: 80px;
+}
+
+.table-striped {
+  width: 90%;
+}
 
 
 /******* FORMS ******/

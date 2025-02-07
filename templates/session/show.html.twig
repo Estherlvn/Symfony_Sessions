@@ -64,7 +64,7 @@
                 {{ form_widget(form.module, {'attr': {'class': 'form-control', 'id': 'programme_module'}}) }}
     
                 <label for="programme_nbJour">Nombre de jours</label>
-                {{ form_widget(form.nbJour, {'attr': {'class': 'form-control', 'id': 'programme_nbJour'}}) }}
+                {{ form_widget(form.nbJour, {'attr': {'class': 'form-control', 'id': 'programme_nbJour', 'min':'1'}}) }}
 
             </div>
             <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>

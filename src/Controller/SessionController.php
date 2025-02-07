@@ -22,16 +22,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class SessionController extends AbstractController
 {
 
-    // Afficher toutes les sessions de la BDD
+        
         #[Route('/session', name: 'app_session')]
         public function index(SessionRepository $sessionRepository): Response
         {
+            // Récupérer les sessions en cours, à venir et passées depuis le repository
+            $sessionsEnCours = $sessionRepository->sessionsEnCours();
+            $sessionsAVenir = $sessionRepository->sessionsAVenir();
+            $sessionsPassees = $sessionRepository->sessionsPassees();
 
-            $sessions = $sessionRepository->findBy([], ['dateDebut'=>'ASC']);
             return $this->render('session/index.html.twig', [
-                'sessions' => $sessions,
+                'sessionsEnCours' => $sessionsEnCours,
+                'sessionsAVenir' => $sessionsAVenir,
+                'sessionsPassees' => $sessionsPassees,
             ]);
         }
+
     
 
     // CREER une nouvelle session ou modifier une session existante
@@ -202,14 +208,11 @@ final class SessionController extends AbstractController
             
             // Supprimer le programme de la session
             $session->removeProgramme($programme);
-            
             // Supprimer le programme de la base de données
             $entityManager->remove($programme);
             $entityManager->flush();
-            
             // Ajouter un message flash de succès
             $this->addFlash('success', 'Le programme a été supprimé avec succès.');
-            
             // Rediriger vers la page de la session après la suppression
             return $this->redirectToRoute('app_session_show', ['id' => $session->getId()]);
         }
