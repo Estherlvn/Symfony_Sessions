@@ -35,6 +35,7 @@
                         <th>Date de début</th>
                         <th>Date de fin</th>
                         <th>Places restantes</th>
+                        <th>Détails</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -47,6 +48,16 @@
                             <td>{{ session.nbPlacesRestantes }}</td>
                             <td>
                                 <a href="{{ path('app_session_show', {'id': session.id}) }}" class="btn btn-sm btn-outline-primary">Détails</a>
+                            </td>
+                            <td>
+
+                                {# <a href="{{ path('formation_remove_session', {'session': session.id}) }}"
+                                class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Voulez-vous vraiment supprimer cette session de la formation ?');">
+                                 Supprimer
+                             </a>
+                              #}
+
                             </td>
                         </tr>
                     {% endfor %}

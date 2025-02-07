@@ -40,8 +40,8 @@
                         <td>
                             <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir détails</a>
                         </td>
+                        
                         <td>
-
                             <a href="{{ path('formation_remove_session', {'formation': formation.id, 'session': session.id}) }}"
                                class="btn btn-outline-danger btn-sm"
                                onclick="return confirm('Voulez-vous vraiment supprimer cette session de la formation ?');">
