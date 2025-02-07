@@ -8,65 +8,50 @@
 <div class="container mt-4">
     <h1 class="text-center">Ajouter un stagiaire</h1>
 
-    <div class="card shadow p-4 mt-4">
+    <div class="card shadow p-4 mt-4" style="max-width: 600px; margin: auto;"> <!-- Réduit la largeur de la carte -->
         {{ form_start(formAddStagiaire, {'attr': {'class': 'needs-validation'}}) }}
         
         <div class="row">
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.nom, 'Nom', {'label_attr': {'class': 'form-label form-label-sm'}}) }} <!-- Réduit la taille des labels -->
+                {{ form_widget(formAddStagiaire.nom, {'attr': {'class': 'form-control form-control-sm'}}) }} <!-- Réduit la taille des champs -->
             </div>
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.prenom, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.prenom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.prenom, 'Prénom', {'label_attr': {'class': 'form-label form-label-sm'}}) }}
+                {{ form_widget(formAddStagiaire.prenom, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.dateNaissance, 'Date de naissance', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.dateNaissance, 'Date de naissance', {'label_attr': {'class': 'form-label form-label-sm'}}) }}
+                {{ form_widget(formAddStagiaire.dateNaissance, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.ville, 'Ville', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.ville, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.ville, 'Ville', {'label_attr': {'class': 'form-label form-label-sm'}}) }}
+                {{ form_widget(formAddStagiaire.ville, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.email, 'Email', {'label_attr': {'class': 'form-label form-label-sm'}}) }}
+                {{ form_widget(formAddStagiaire.email, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
             <div class="col-md-6 mb-3">
-                {{ form_label(formAddStagiaire.telephone, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formAddStagiaire.telephone, {'attr': {'class': 'form-control'}}) }}
+                {{ form_label(formAddStagiaire.telephone, 'Téléphone', {'label_attr': {'class': 'form-label form-label-sm'}}) }}
+                {{ form_widget(formAddStagiaire.telephone, {'attr': {'class': 'form-control form-control-sm'}}) }}
             </div>
         </div>
 
-        {# <div class="mb-3">
-            <label class="form-label">Sessions</label>
-            <div class="form-check">
-                {% for choice in formAddStagiaire.sessions %}
-                    <div class="form-check">
-                        {{ form_widget(choice) }}
-                        <label class="form-check-label">
-                            <!-- Dans Twig, utiliser  "choice.vars.label"  au lieu de "choice.label" 
-                            pour obtenir le label de l'élément de formulaire -->
-                            {{ choice.vars.label }} 
-                        </label>
-                    </div>
-                {% endfor %}
-            </div>
-        </div> #}
-        
+        {# Réduction de la taille des boutons en utilisant des classes Bootstrap #}
         <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary px-5 py-2">Enregistrer</button>
-        <a href="{{ path('app_stagiaire') }}" class="btn btn-secondary px-5 py-2">Annuler</a>
+            <a href="{{ path('app_stagiaire') }}" class="btn btn-secondary px-4 py-2 btn-sm">Annuler</a> <!-- Réduit la taille du bouton -->
+            <button type="submit" class="btn btn-primary px-4 py-2 btn-sm">Enregistrer</button> <!-- Réduit la taille du bouton -->
         </div>
-
 
         {{ form_end(formAddStagiaire) }}
     </div>
 </div>
+
 {% endblock %}

@@ -14,7 +14,10 @@
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ categorie.nomCategorie }}</h5>
-                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-outline-primary btn-sm">Voir les détails</a>
+                        <div class="d-flex justify-content-end">
+                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}"
+                           class="btn btn-outline-primary btn-sm float end">Voir les modules</a>
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -27,6 +30,7 @@
         {% endfor %}
     </div>
 </div>
+
 
 {% endblock %}
 

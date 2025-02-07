@@ -1,25 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste de tous les modules{% endblock %}
+{% block title %}Liste des modules par catégorie{% endblock %}
 
 {% block body %}
 
-    <h1>Tous les modules</h1>
-
-    <ul>
-        {% for module in modules %}
-            <li>
-
-                {{ module.nomModule }}
-
-            </li>
-        {% endfor %}
-    </ul>
-
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Liste des modules par catégorie</h1>
 
     <a href="{{ path('new_module') }}" class="button-64" role="button">
         <span class="text">Ajouter un module</span>
     </a>
+</div>
+
+<div class="container mt-4">
+
+    {% for categorie in categories %}
+        <div class="category-section">
+            <h2>{{ categorie.nomCategorie }}</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom du module</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for module in categorie.modules %}
+                        <tr>
+                            <td>{{ module.nomModule }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
     
+</div>
 
 {% endblock %}
