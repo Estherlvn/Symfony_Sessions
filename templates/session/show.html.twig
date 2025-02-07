@@ -16,66 +16,144 @@
 
         
 
-    {# Tableau des modules de la session #}
-    {% if session.programmes is not empty %}
-        <h3>Modules de la session</h3>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Tableau des modules de la session -->
+        <div class="col-md-8">
+            {% if session.programmes is not empty %}
+                <h3>Modules de la session</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Intitulé</th>
+                            <th>Durée</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for programme in session.programmes %}
+                            <tr>
+                                <td>{{ programme.module.nomModule }}</td>
+                                <td>
+                                    {{ programme.nbJour }} 
+                                    {{ programme.nbJour == 1 ? 'jour' : 'jours' }} 
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_session_remove_programme', { 'sessionId': session.id, 'programmeId': programme.id }) }}"
+                                       class="btn btn-outline-danger btn-sm"
+                                       onclick="return confirm('Voulez-vous vraiment retirer ce module de la session ?');">
+                                        Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Aucun module trouvé pour cette session.</p>
+            {% endif %}
+        </div>
+
+        <!-- Formulaire pour ajouter un nouveau programme -->
+        <div class="col-md-4">
+            <div class="sectionForm">
+                <p class="titleP">Ajouter un nouveau programme</p>
+                <form method="post" action="{{ path('app_session_add_programme', {'id': session.id}) }}">
+                    {{ form_start(form) }}
+                    
+                    <div class="form-group" id="labelProg">
+                        <label for="programme_module">Module</label>
+                        {{ form_widget(form.module, {'attr': {'class': 'form-control', 'id': 'programme_module'}}) }}
+
+                        <label for="programme_nbJour">Nombre de jours</label>
+                        {{ form_widget(form.nbJour, {'attr': {'class': 'form-control', 'id': 'programme_nbJour', 'min': '1', 'value': '1'}}) }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>
+                    {{ form_end(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="container mt-4">
+            <div class="col-md-8" id="stagSection">
+                {% if session.stagiaires is not empty %}
+                <h3>Stagiaires inscrits</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom du stagiaire</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stagiaire in session.stagiaires %}
+                                <tr>
+                                    <td>{{ stagiaire.nom }}</td>
+                                    <td>{{ stagiaire.email }}</td>
+                                    <td>
+                                        <a href="{{ path('session_remove_stagiaire', {'session': session.id, 'stagiaire': stagiaire.id}) }}"
+                                        class="btn btn-outline-danger btn-sm"
+                                        onclick="return confirm('Voulez-vous vraiment retirer ce stagiaire de la session ?');">
+                                            Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun stagiaire inscrit pour cette session.</p>
+                {% endif %}
+        </div>
+    </div>
+</div>
+
+
+    {# Tableau des stagiaires non inscrits dans la session #}
+    
+<div class="container mt-4">
+    <div class="col-md-8">
+        {% if stagiairesNonInscrits is not empty %}
+        <h3>Stagiaires non inscrits</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Intitulé</th>
-                    <th>Durée</th>
+                    <th>Nom du stagiaire</th>
+                    <th>Email</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                {% for programme in session.programmes %}
+                {% for stagiaire in stagiairesNonInscrits %}
                     <tr>
-                        <td>{{ programme.module.nomModule }}</td>
+                        <td>{{ stagiaire.nom }}</td>
+                        <td>{{ stagiaire.email }}</td>
                         <td>
-                            {{ programme.nbJour }} 
-                            {{ programme.nbJour == 1 ? 'jour' : 'jours' }} 
-                        </td>
-                        <td>
-                            
-                            <a href="{{ path('app_session_remove_programme', { 'sessionId': session.id, 'programmeId': programme.id }) }}"
-
-                                class="btn btn-outline-danger btn-sm"
-                                onclick="return confirm('Voulez-vous vraiment retirer ce module de la session ?');">
-                                    Supprimer
-                            </a>
+                            <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
+                                <input type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
+                                <button type="submit" class="btn btn-outline-success btn-sm">
+                                    Ajouter
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    {% else %}
-        <p>Aucun module trouvé pour cette session.</p>
-    {% endif %}
-
-    {# Formulaire pour ajouter un nouveau programme dans la session + l'inscrire en base de données #}
-    <div class="sectionForm">
-        <p class="titleP">Ajouter un nouveau programme</p>
-        <form method="post" action="{{ path('app_session_add_programme', {'id': session.id}) }}">
-
-            {{ form_start(form) }}
-            
-            <div class="form-group" id="labelProg">
-                <label for="programme_module">Module</label>
-                {{ form_widget(form.module, {'attr': {'class': 'form-control', 'id': 'programme_module'}}) }}
-
-                <label for="programme_nbJour">Nombre de jours</label>
-                {{ form_widget(form.nbJour, {'attr': {'class': 'form-control', 'id': 'programme_nbJour', 'min': '1', 'value': '1'}}) }}
-            </div>
-            
-            <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>
-            {{ form_end(form) }}
-        </form>
+        {% else %}
+        <p>Tous les stagiaires sont déjà inscrits à cette session.</p>
+        {% endif %}
     </div>
-
-
+</div>
 
      {# Formulaire pour ajouter un stagiaire #}
-     <div class="sectionForm">
+     {# <div class="sectionForm">
         <p class="titleP">Ajouter un stagiaire</p>
         <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
             <div class="form-group">
@@ -88,78 +166,8 @@
             </div>
             <button type="submit" class="btn btn-outline-success btn-sm">Ajouter</button>
         </form>
-        </div>
+        </div> #}
 
-
-    {# Tableau des stagiaires inscrits dans la session #}
-    <div class="section-principale">
-    {% if session.stagiaires is not empty %}
-    <h3>Stagiaires inscrits</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom du stagiaire</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stagiaire in session.stagiaires %}
-                    <tr>
-                        <td>{{ stagiaire.nom }}</td>
-                        <td>{{ stagiaire.email }}</td>
-                        <td>
-                            <a href="{{ path('session_remove_stagiaire', {'session': session.id, 'stagiaire': stagiaire.id}) }}"
-                               class="btn btn-outline-danger btn-sm"
-                               onclick="return confirm('Voulez-vous vraiment retirer ce stagiaire de la session ?');">
-                                Supprimer
-                            </a>
-                        </td>
-                    </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Aucun stagiaire inscrit pour cette session.</p>
-    {% endif %}
-    </div>
-
-
-    {# Tableau des stagiaires non inscrits dans la session #}
-    {% if stagiairesNonInscrits is not empty %}
-    <h3>Stagiaires non inscrits</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom du stagiaire</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stagiaire in stagiairesNonInscrits %}
-                <tr>
-                    <td>{{ stagiaire.nom }}</td>
-                    <td>{{ stagiaire.email }}</td>
-                    <td>
-                        <form method="post" action="{{ path('session_add_stagiaire', {'id': session.id}) }}">
-                            <input type="hidden" name="stagiaireId" value="{{ stagiaire.id }}">
-                            <button type="submit" class="btn btn-outline-success btn-sm">
-                                Ajouter
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>Tous les stagiaires sont déjà inscrits à cette session.</p>
-    {% endif %}
-
-
-    
 
 {% endblock %}
 
