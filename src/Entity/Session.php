@@ -181,6 +181,7 @@ class Session
         return $this->programmes;
     }
 
+    // Ajouter un programme dans la session
     public function addProgramme(Programme $programme): static
     {
         if (!$this->programmes->contains($programme)) {
@@ -191,15 +192,30 @@ class Session
         return $this;
     }
 
-    public function removeProgramme(Programme $programme): static
-    {
-        if ($this->programmes->removeElement($programme)) {
-            // set the owning side to null (unless already changed)
-            if ($programme->getSession() === $this) {
-                $programme->setSession(null);
-            }
+public function removeProgramme(Programme $programme): self
+{
+    if ($this->programmes->removeElement($programme)) {
+        // Vérifier si l'association est toujours valide
+        if ($programme->getSession() === $this) {
+            $programme->setSession(null);
         }
-
-        return $this;
     }
+
+    return $this;
 }
+
+
+    // public function removeProgramme(Programme $programme): static
+    // {
+    //     if ($this->programmes->removeElement($programme)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($programme->getSession() === $this) {
+    //             $programme->setSession(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+}
+
+
