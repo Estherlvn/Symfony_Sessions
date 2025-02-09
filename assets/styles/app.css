@@ -132,6 +132,10 @@ a.nav-link {
   color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
 }
 
+.homePage {
+  margin-bottom: 100px;
+}
+
 
 /******SESSION*******/
 .sessionTab {
@@ -139,7 +143,6 @@ a.nav-link {
 }
 
 .table-striped {
-  width: 90%;
   margin-top: 10px;
 }
 
@@ -177,9 +180,6 @@ margin-top: 50px;
   margin-top: 50px;
   }
 
-
-
-
 /******BUTTONS**********/
 
 .backBtn {
@@ -195,6 +195,7 @@ margin-top: 50px;
   border-image: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2) 1; 
 }
 
+
 a.backBtn {
   background: -webkit-linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les anciens navigateurs */
   background: linear-gradient(158deg, #cf07b4, #af29fe, #7048ff, #1f65f2); /* Gradient pour les navigateurs modernes */
@@ -203,9 +204,6 @@ a.backBtn {
   color: transparent; /* Rend le texte transparent afin que seule la couleur du gradient soit visible */
 }
 
-.backBtn:hover {
-
-}
 
 .button-64 {
   align-items: center;

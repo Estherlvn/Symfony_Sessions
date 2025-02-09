@@ -5,26 +5,46 @@
 {% block body %}
 
 
-<div class="homePage">
+    <div class="homePage">
 
-    <h1>Bienvenue sur votre tableau de bord, <span class="formatech">FormaTech</span></h1>
+        <h1>Bienvenue sur votre tableau de bord, <span class="formatech">FormaTech</span></h1>
 
-    <section id="homeS1">
-    <div class="homeMenu">
-        <img src="{{ asset('img/book.png') }}" alt="image de livre pour Sessions" width="35">
-        <a href="{{ path('app_sessions') }}">Consulter les sessions à venir</a>
-    </div>
-    <div class="homeMenu">
-        <img src="{{ asset('img/teach.png') }}" alt="image de professeur pour Formateurs" width="35">
-        <a href="{{ path('app_formateurs') }}">Consulter la liste des formateurs</a>
-    </div>
-    <div class="homeMenu">
-        <img src="{{ asset('img/cap.png') }}" alt="image de chapeau pour Stagiaires" width="35">
-        <a href="{{ path('app_stagiaires') }}">Consulter la liste des stagiaires</a>
-    </div>
-    </section>
+        <section id="homeS1">
+        <div class="homeMenu">
+            <img src="{{ asset('img/book.png') }}" alt="image de livre pour Sessions" width="35">
+            <a href="{{ path('app_sessions') }}">Consulter toutes les sessions</a>
+        </div>
+        <div class="homeMenu">
+            <img src="{{ asset('img/teach.png') }}" alt="image de professeur pour Formations" width="35">
+            <a href="{{ path('app_formations') }}">Consulter la liste des formations</a>
+        </div>
+        <div class="homeMenu">
+            <img src="{{ asset('img/cap.png') }}" alt="image de chapeau pour Stagiaires" width="35">
+            <a href="{{ path('app_stagiaires') }}">Consulter la liste des stagiaires</a>
+        </div>
+        </section>
 
-</div>
+    </div>
+
+
+    <div class="d-flex flex-wrap mb-3">
+        <div class="me-2 me-md-4 mb-2">
+            <a href="{{ path('new_session') }}" class="button-64" role="button">
+                <span class="text">Ajouter une session</span>
+            </a>
+        </div>
+        <div class="me-2 me-md-4 mb-2">
+            <a href="{{ path('new_stagiaire') }}" class="button-64" role="button">
+                <span class="text">Ajouter un stagiaire</span>
+            </a>
+        </div>
+        <div class="me-2 me-md-4 mb-2">
+            <a href="{{ path('new_formateur') }}" class="button-64" role="button">
+                <span class="text">Ajouter un formateur</span>
+            </a>
+        </div>
+    </div>
+
 
 {% endblock %}
 

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-5">
     <h2>{{ formation.nomFormation }}</h2>
     <a href="{{ path('app_formations') }}" class="backBtn" role="button">
         <span class="text">Retour à la liste des formations</span>
@@ -22,8 +22,9 @@
                     <th>Nombre de places</th>
                     <th>Places réservées</th>
                     <th>Places restantes</th>
-                    <th>Détail</th>
-                    <th>Action</th>
+                    <th>Détails</th>
+                    <th>Suppr.</th>
+                    <th>Editer</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,14 +39,16 @@
                         <td>{{ session.nbPlacesRestantes }}</td>
 
                         <td>
-                            <a href="{{ path('app_session_show', {'id': session.id}) }}">Voir détails</a>
+                            <a href="{{ path('app_session_show', {'id': session.id}) }}">
+                                <img src="{{ asset('img/check.png') }}" alt="image checkbox pour voir les détails de la session" width="25">
+                            </a>
                         </td>
                         
                         <td>
                             <a href="{{ path('formation_remove_session', {'formation': formation.id, 'session': session.id}) }}"
                                class="btn btn-outline-danger btn-sm"
                                onclick="return confirm('Voulez-vous vraiment supprimer cette session de la formation ?');">
-                                Supprimer
+                                Suppr
                             </a>
                         </td>
                     
@@ -58,6 +61,9 @@
         <p>Aucune session trouvée pour cette formation.</p>
     {% endif %}
 
+    <a href="{{ path('new_session') }}" class="button-64" role="button">
+        <span class="text">Ajouter une session</span>
+    </a>
 
   
 

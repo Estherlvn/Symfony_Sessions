@@ -50,34 +50,36 @@
                             Accueil
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_categories' %}active{% endif %}" 
-                           href="{{ path('app_categories') }}">
-                            Catégories
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_formations' %}active{% endif %}" 
-                           href="{{ path('app_formations') }}">
-                            Formations
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_sessions' %}active{% endif %}" 
-                           href="{{ path('app_sessions') }}">
-                            Sessions
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_sessions' %}active{% endif %}" 
+                               href="{{ path('app_sessions') }}">
+                                Sessions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_formations' %}active{% endif %}" 
+                               href="{{ path('app_formations') }}">
+                                Formations
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_stagiaires' %}active{% endif %}" 
+                               href="{{ path('app_stagiaires') }}">
+                                Stagiaires
+                            </a>
+                        </li>
+                        
                     <li class="nav-item">
                         <a class="nav-link {% if app.request.attributes.get('_route') == 'app_formateurs' %}active{% endif %}" 
                            href="{{ path('app_formateurs') }}">
                             Formateurs
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_stagiaires' %}active{% endif %}" 
-                           href="{{ path('app_stagiaires') }}">
-                            Stagiaires
+                        <a class="nav-link {% if app.request.attributes.get('_route') == 'app_categories' %}active{% endif %}" 
+                           href="{{ path('app_categories') }}">
+                            Catégories
                         </a>
                     </li>
                     <li class="nav-item">

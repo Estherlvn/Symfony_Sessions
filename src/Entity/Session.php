@@ -48,7 +48,7 @@ class Session
     /**
      * @var Collection<int, Programme>
      */
-    #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'session')]
+    #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'session', cascade: ["remove"])]
     private Collection $programmes;
 
     public function __construct()

@@ -23,12 +23,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class SessionController extends AbstractController
 {
 
-        
+
         #[Route('/session', name: 'app_session')]
         public function index(SessionRepository $sessionRepository): Response
         {
-            
-            
     // Récupérer les sessions en cours, à venir et passées depuis le repository
             $sessionsEnCours = $sessionRepository->sessionsEnCours();
             $sessionsAVenir = $sessionRepository->sessionsAVenir();
@@ -41,9 +39,8 @@ final class SessionController extends AbstractController
             ]);
         }
 
-    
 
-    // CREER une nouvelle session ou modifier une session existante
+    // CREER une nouvelle session ou MODIFIER une session existante
         #[Route('/session/new', name: 'new_session')]
         #[Route('/session/{id}/edit', name: 'edit_session')]
         public function new_session(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
@@ -51,9 +48,7 @@ final class SessionController extends AbstractController
             if(!$session) { 
                 $session = new Session();
             }
-
             $form = $this->createForm(SessionType::class, $session);
-
             // soumission du formulaire et insertion en bdd
             $form->handleRequest($request);
 
@@ -67,11 +62,35 @@ final class SessionController extends AbstractController
 
                 return $this->redirectToRoute('app_session');
             }
-
             return $this->render('session/new.html.twig', [
                 'formAddSession' => $form,
             ]);
         }
+
+
+    // SUPPRIMER UNE SESSION
+        #[Route('/session/{id}/delete', name: 'app_session_delete')]
+        public function delete(Session $session, EntityManagerInterface $entityManager): Response
+        {
+            // Retirer les stagiaires de la session (désinscrire sans supprimer)
+            foreach ($session->getStagiaires() as $stagiaire) {
+                // Désinscrire chaque stagiaire de cette session
+                $session->removeStagiaire($stagiaire);
+            }
+        
+            // Supprimer tous les programmes liés à la session
+            foreach ($session->getProgrammes() as $programme) {
+                $entityManager->remove($programme);
+            }
+        
+            // Supprimer la session
+            $entityManager->remove($session);
+            $entityManager->flush();
+        
+            // Rediriger vers la liste des sessions après suppression
+            return $this->redirectToRoute('app_session');
+        }
+        
 
 
     // SUPPRESSION d'un stagiaire inscrit dans une session donnée
@@ -203,7 +222,7 @@ final class SessionController extends AbstractController
                      $this->addFlash('error', 'Ce module est déjà ajouté à cette session.');
                  } else {
                      // Ajouter le programme à la session
-                     $this->addProgrammeToSession($session, $programme, $entityManager);
+                    //  $this->addProgrammeToSession($session, $programme, $entityManager);
                      $this->addFlash('success', 'Le programme a été ajouté avec succès.');
                  }
  

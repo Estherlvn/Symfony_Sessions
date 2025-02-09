@@ -36,7 +36,7 @@
                         <th>Date de fin</th>
                         <th>Places restantes</th>
                         <th>Détails</th>
-                        <th>Actions</th>
+                        <th>Suppr.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,25 +46,32 @@
                             <td>{{ session.dateDebut|date('d/m/Y') }}</td>
                             <td>{{ session.dateFin|date('d/m/Y') }}</td>
                             <td>{{ session.nbPlacesRestantes }}</td>
-                            <td>
-                                <a href="{{ path('app_session_show', {'id': session.id}) }}" class="btn btn-sm btn-outline-primary">Détails</a>
-                            </td>
-                            <td>
 
-                                {# <a href="{{ path('formation_remove_session', {'session': session.id}) }}"
-                                class="btn btn-outline-danger btn-sm"
-                                onclick="return confirm('Voulez-vous vraiment supprimer cette session de la formation ?');">
-                                 Supprimer
-                             </a>
-                              #}
-
+                            <td>
+                                <a href="{{ path('app_session_show', {'id': session.id}) }}">
+                                    <img src="{{ asset('img/check.png') }}" alt="image checkbox pour voir les détails de la session" width="25">
+                                </a>
                             </td>
+
+    
+                            
+                            <td>
+                                <form action="{{ path('app_session_delete', {'id': session.id}) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"
+                                        onclick="return confirm('Voulez-vous vraiment supprimer cette session ?');">
+                                        Suppr
+                                    </button>
+                                </form>
+                            </td>
+                            
+
+
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="text-muted">Aucune session dans cette catégorie.</p>
+            <p class="text-muted">Aucune session trouvée dans cette catégorie.</p>
         {% endif %}
     {% endfor %}
 </div>

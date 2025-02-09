@@ -55,13 +55,12 @@ CREATE TABLE IF NOT EXISTS `formateur` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.formateur : ~5 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.formateur : ~4 rows (environ)
 INSERT INTO `formateur` (`id`, `nom`, `prenom`, `email`) VALUES
 	(1, 'LEDOYEN', 'Daniel', 'daniel@formatech.com'),
 	(2, 'LEJEUNE', 'Christelle', 'christelle@formatech.com'),
 	(3, 'NARCISSE', 'Roger', 'roger@formatech.com'),
-	(4, 'SERAN', 'Gregoire', 'gregoire@formatech.com'),
-	(5, 'TEST', 'Formateur', 'formateur@exemple.fr');
+	(4, 'SERAN', 'Gregoire', 'gregoire@formatech.com');
 
 -- Listage de la structure de table ledlevsymfonysessions. formation
 CREATE TABLE IF NOT EXISTS `formation` (
@@ -70,12 +69,11 @@ CREATE TABLE IF NOT EXISTS `formation` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.formation : ~6 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.formation : ~5 rows (environ)
 INSERT INTO `formation` (`id`, `nom_formation`) VALUES
 	(1, 'Découverte du numérique'),
 	(2, 'Inititation au développement web'),
 	(3, 'Réussir une vente'),
-	(4, 'Introduction à la suite Office'),
 	(5, 'Outils en comptabilité'),
 	(6, 'Gestion RH');
 
@@ -106,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   CONSTRAINT `FK_C242628BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.module : ~26 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.module : ~24 rows (environ)
 INSERT INTO `module` (`id`, `categorie_id`, `nom_module`) VALUES
 	(1, 1, 'Word'),
 	(2, 1, 'Excel'),
@@ -131,9 +129,7 @@ INSERT INTO `module` (`id`, `categorie_id`, `nom_module`) VALUES
 	(21, 4, 'Gestion de stocks'),
 	(22, 5, 'Communication'),
 	(23, 5, 'Teambuilding'),
-	(24, 5, 'Gestion des ressources'),
-	(26, 3, 'Test ajout module'),
-	(27, 5, 'Test ajout module 2');
+	(24, 5, 'Gestion des ressources');
 
 -- Listage de la structure de table ledlevsymfonysessions. programme
 CREATE TABLE IF NOT EXISTS `programme` (
@@ -144,11 +140,11 @@ CREATE TABLE IF NOT EXISTS `programme` (
   PRIMARY KEY (`id`),
   KEY `IDX_3DDCB9FF613FECDF` (`session_id`),
   KEY `IDX_3DDCB9FFAFC2B591` (`module_id`),
-  CONSTRAINT `FK_3DDCB9FF613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`),
+  CONSTRAINT `FK_3DDCB9FF613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_3DDCB9FFAFC2B591` FOREIGN KEY (`module_id`) REFERENCES `module` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.programme : ~14 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.programme : ~8 rows (environ)
 INSERT INTO `programme` (`id`, `session_id`, `module_id`, `nb_jour`) VALUES
 	(1, 1, 4, 3),
 	(2, 1, 5, 1),
@@ -156,14 +152,8 @@ INSERT INTO `programme` (`id`, `session_id`, `module_id`, `nb_jour`) VALUES
 	(4, 2, 13, 2),
 	(5, 2, 8, 3),
 	(6, 2, 10, 5),
-	(7, 3, 2, 3),
-	(8, 3, 22, 2),
-	(9, 4, 22, 2),
-	(10, 4, 23, 3),
-	(11, 4, 24, 4),
 	(21, 1, 18, 2),
-	(22, 1, 13, 2),
-	(24, 3, 3, 1);
+	(22, 1, 13, 2);
 
 -- Listage de la structure de table ledlevsymfonysessions. session
 CREATE TABLE IF NOT EXISTS `session` (
@@ -179,14 +169,12 @@ CREATE TABLE IF NOT EXISTS `session` (
   KEY `IDX_D044D5D4155D8F51` (`formateur_id`),
   CONSTRAINT `FK_D044D5D4155D8F51` FOREIGN KEY (`formateur_id`) REFERENCES `formateur` (`id`),
   CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.session : ~4 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.session : ~2 rows (environ)
 INSERT INTO `session` (`id`, `formation_id`, `formateur_id`, `intitule`, `date_debut`, `date_fin`, `nb_place`) VALUES
 	(1, 1, 1, 'Créer une page web statique', '2025-02-28', '2025-03-28', 15),
-	(2, 1, 1, 'Développement web fullstack', '2025-04-28', '2025-07-28', 15),
-	(3, 4, 3, 'Informatique de l\'administration', '2025-01-28', '2025-02-28', 20),
-	(4, 6, 2, 'Premiers pas RH', '2025-06-01', '2025-07-15', 20);
+	(2, 1, 1, 'Développement web fullstack', '2025-04-28', '2025-07-28', 15);
 
 -- Listage de la structure de table ledlevsymfonysessions. session_stagiaire
 CREATE TABLE IF NOT EXISTS `session_stagiaire` (
@@ -199,17 +187,14 @@ CREATE TABLE IF NOT EXISTS `session_stagiaire` (
   CONSTRAINT `FK_C80B23BBBA93DD6` FOREIGN KEY (`stagiaire_id`) REFERENCES `stagiaire` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~9 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.session_stagiaire : ~6 rows (environ)
 INSERT INTO `session_stagiaire` (`session_id`, `stagiaire_id`) VALUES
+	(1, 1),
 	(1, 4),
 	(1, 7),
 	(1, 8),
 	(2, 7),
-	(2, 8),
-	(3, 2),
-	(3, 3),
-	(3, 4),
-	(4, 7);
+	(2, 8);
 
 -- Listage de la structure de table ledlevsymfonysessions. stagiaire
 CREATE TABLE IF NOT EXISTS `stagiaire` (
@@ -221,16 +206,19 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table ledlevsymfonysessions.stagiaire : ~6 rows (environ)
+-- Listage des données de la table ledlevsymfonysessions.stagiaire : ~9 rows (environ)
 INSERT INTO `stagiaire` (`id`, `nom`, `prenom`, `date_naissance`, `ville`, `email`, `telephone`) VALUES
 	(1, 'MARCHAND', 'Maxime', '1988-01-21', 'STRASBOURG', 'maxime@stagiaire.fr', '0645796525'),
 	(2, 'LOYAL', 'Clara', '2000-02-23', 'MULHOUSE', 'clara@stagiaire.fr', '0645963521'),
-	(3, 'FRAISE', 'Guillaume', '1997-07-17', 'STRASBOURG', 'guillaume@stagiaire.fr', '0645852535'),
+	(3, 'LEGRAND', 'Guillaume', '1997-07-17', 'STRASBOURG', 'guillaume@stagiaire.fr', '0645852535'),
 	(4, 'LAFORET', 'Marie', '2000-02-08', 'MULHOUSE', 'marie@stagiaire.fr', '0689632541'),
-	(7, 'LEDOUX', 'Esther', '1993-11-07', 'CESSON SEVIGNE', 'estherlvn@gmail.com', '0645748032'),
-	(8, 'Bgra', 'Seif', '2001-05-30', 'Boumerdes', 'seif@exemple.fr', '0256485963');
+	(7, 'LEDOUX', 'Esther', '1993-11-07', 'CESSON SEVIGNE', 'esther@exemple.fr', '0645747831'),
+	(8, 'BOUGUERRA', 'Seif', '2001-05-30', 'STRASBOURG', 'seif@exemple.fr', '0256485963'),
+	(9, 'LEDOUX', 'Simon', '1994-11-17', 'RENNES', 'simon@exemple.fr', '0645725033'),
+	(10, 'BUREAU', 'Paul', '2000-02-09', 'RENNES', 'paul@exemple.fr', '0285963602'),
+	(11, 'DUMAS', 'Alex', '2003-02-10', 'MULHOUSE', 'alex@exemple.fr', '0748592602');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
